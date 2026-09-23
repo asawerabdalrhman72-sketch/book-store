@@ -1,402 +1,703 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
 <head>
-    <title>عالم الكتب</title><!-- EmailJS -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عالم الكتب</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <style>
-    body {
-        font-family: "Tahoma", sans-serif;
-        background-color: #f5f5f5;
-        text-align: center;
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Tahoma, Arial, sans-serif;
+    background: #f5f0fa;
+    color: #333;
+}
+
+/* الهيدر */
+header {
+    background: linear-gradient(135deg, #6a4c93, #9270b5);
+    color: white;
+    text-align: center;
+    padding: 35px 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 35px;
+}
+
+header p {
+    margin: 12px 0 0;
+    font-size: 17px;
+}
+
+/* العنوان */
+.welcome {
+    text-align: center;
+    padding: 30px 15px 15px;
+}
+
+.welcome h2 {
+    color: #6a4c93;
+    font-size: 28px;
+    margin: 0 0 10px;
+}
+
+.welcome p {
+    color: #666;
+}
+
+/* الكتب */
+.books-container {
+    width: 92%;
+    max-width: 1100px;
+    margin: 25px auto 45px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.book {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.10);
+}
+
+.book-image {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    display: block;
+}
+
+.book-content {
+    padding: 20px;
+}
+
+.book h2 {
+    color: #3f3150;
+    font-size: 20px;
+    min-height: 45px;
+}
+
+.price {
+    color: #6a4c93;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+button {
+    background: #6a4c93;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 9px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #513673;
+}
+
+/* أعلام السودان */
+.sudan-flags {
+    font-size: 28px;
+    padding: 12px 0 0;
+    letter-spacing: 4px;
+}
+
+/* الأقسام */
+.section {
+    width: 92%;
+    max-width: 800px;
+    margin: 25px auto;
+}
+
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.10);
+}
+
+.section-title {
+    text-align: center;
+    color: #6a4c93;
+}
+
+/* السلة */
+#cart {
+    line-height: 2;
+    min-height: 40px;
+}
+
+#cart button {
+    background: #c94c4c;
+    padding: 6px 12px;
+    font-size: 13px;
+}
+
+#total {
+    text-align: center;
+    color: #6a4c93;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* النموذج */
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"] {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 9px;
+    font-size: 15px;
+}
+
+.payment-box {
+    background: #f7f2fb;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.payment-option {
+    display: block;
+    margin: 12px 0;
+}
+
+.confirm {
+    width: 100%;
+    font-size: 17px;
+}
+
+#message {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 18px;
+}
+
+/* ملخص الطلب */
+#orderSummary {
+    width: 92%;
+    max-width: 800px;
+    margin: 30px auto 50px;
+    padding: 25px;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.10);
+}
+
+#orderSummary h2 {
+    color: #6a4c93;
+    text-align: center;
+}
+
+#orderSummary p {
+    line-height: 2;
+}
+
+/* الفوتر */
+footer {
+    background: #3f3150;
+    color: white;
+    text-align: center;
+    padding: 22px;
+}
+
+/* الهاتف */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 29px;
     }
 
-    h1 {
-        background-color: #6a4c93;
-        color: white;
-        padding: 20px;
+    .books-container {
+        grid-template-columns: 1fr;
     }
 
-    h2 {
-        color: #333;
+    .book-image {
+        height: 260px;
     }
-
-    .book {
-        background-color: white;
-        margin: 15px auto;
-        padding: 20px;
-        border-radius: 15px;
-        width: 85%;
-        max-width: 350px;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-    }
-
-    button {
-        background-color: #6a4c93;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-    }
-
-    #cart {
-        background-color: white;
-        padding: 15px;
-        margin: 15px;
-        border-radius: 10px;
-    }
-
-    #total {
-        font-weight: bold;
-        font-size: 18px;
-    }
-
-    #orderSummary {
-        background-color: white;
-        margin: 20px auto;
-        padding: 20px;
-        border-radius: 15px;
-        width: 85%;
-        max-width: 400px;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-    }
-
-    #orderSummary h2 {
-        color: #6a4c93;
-        margin-bottom: 15px;
-    }
-
-    #orderSummary p {
-        font-size: 16px;
-        line-height: 1.8;
-        color: #444;
-    }
+}
 </style>
 
-</head><body><h1>📚 عالم الكتب</h1>
+</head>
 
-<p>مرحباً بكم في متجرنا الإلكتروني</p>
+<body>
 
-<h2>🛒 سلة المشتريات</h2>
+<header>
+    <h1>📚 عالم الكتب</h1>
+    <p>اكتشف عالمًا من المعرفة والقصص بين يديك</p>
+</header>
 
-<p id="cart">السلة فارغة</p>
+<section class="welcome">
+    <h2>📖 كتبنا المميزة</h2>
+    <p>اختر كتابك المفضل وأضفه إلى سلة المشتريات</p>
+</section>
 
-<p id="total">المجموع: 0 جنيه</p>
 
-<h2>📝 إتمام الشراء</h2>
+<!-- الكتب -->
 
-<label>الاسم:</label>
-<br>
-<input type="text" id="name" placeholder="اكتبي اسمك">
+<div class="books-container">
 
-<br><br>
+    <!-- البرمجة -->
+    <div class="book">
+        <img class="book-image"
+        src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=600&q=80"
+        alt="كتاب البرمجة">
 
-<label>البريد الإلكتروني:</label>
-<br>
-<input type="email" id="email" placeholder="اكتبي البريد الإلكتروني">
+        <div class="book-content">
+            <h2>البرمجة</h2>
+            <p class="price">5000 جنيه</p>
+            <button onclick="addToCart('البرمجة',5000)">🛒 شراء</button>
+        </div>
+    </div>
 
-<br><br>
 
-<h3>💳 طريقة الدفع</h3>
+    <!-- قواعد البيانات -->
+    <div class="book">
+        <img class="book-image"
+        src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=600&q=80"
+        alt="قواعد البيانات">
 
-<label>
-    <input type="radio" name="payment" value="تحويل بنكي">
-    تحويل بنكي
-</label>
+        <div class="book-content">
+            <h2>قواعد البيانات</h2>
+            <p class="price">7000 جنيه</p>
+            <button onclick="addToCart('قواعد البيانات',7000)">🛒 شراء</button>
+        </div>
+    </div>
 
-<br>
 
-<label>
-    <input type="radio" name="payment" value="دفع إلكتروني">
-    دفع إلكتروني
-</label>
+    <!-- موسم الهجرة إلى الشمال -->
+    <div class="book">
+        <img class="book-image"
+        src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=600&q=80"
+        alt="موسم الهجرة إلى الشمال">
 
-<br><br>
+        <div class="book-content">
+            <h2>موسم الهجرة إلى الشمال</h2>
+            <p class="price">8000 جنيه</p>
+            <button onclick="addToCart('رواية موسم الهجرة إلى الشمال',8000)">🛒 شراء</button>
+        </div>
+    </div>
 
-<button onclick="checkout()">تأكيد الشراء</button>
 
-<p id="message"></p>
+    <!-- تجارة إلكترونية -->
+    <div class="book">
+        <img class="book-image"
+        src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&q=80"
+        alt="تجارة إلكترونية">
+
+        <div class="book-content">
+            <h2>تجارة إلكترونية</h2>
+            <p class="price">7000 جنيه</p>
+            <button onclick="addToCart('تجارة إلكترونية',7000)">🛒 شراء</button>
+        </div>
+    </div>
+
+
+    <!-- تاريخ السودان -->
+    <div class="book">
+
+        <img class="book-image"
+        src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=600&q=80"
+        alt="كتاب تاريخ السودان">
+
+        <div class="sudan-flags">
+            🇸🇩 🇸🇩 🇸🇩
+        </div>
+
+        <div class="book-content">
+            <h2>تاريخ السودان 🇸🇩</h2>
+            <p class="price">9000 جنيه</p>
+            <button onclick="addToCart('تاريخ السودان',9000)">🛒 شراء</button>
+        </div>
+
+    </div>
+
+
+    <!-- القرآن الكريم -->
+    <div class="book">
+
+        <img class="book-image"
+        src="https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=600&q=80"
+        alt="القرآن الكريم">
+
+        <div class="book-content">
+            <h2>القرآن الكريم</h2>
+            <p class="price">6000 جنيه</p>
+            <button onclick="addToCart('القرآن الكريم',6000)">🛒 شراء</button>
+        </div>
+
+    </div>
+
+
+    <!-- قصص الأنبياء -->
+    <div class="book">
+
+        <img class="book-image"
+        src="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=600&q=80"
+        alt="كتاب قصص الأنبياء">
+
+        <div class="book-content">
+            <h2>قصص الأنبياء</h2>
+            <p class="price">7000 جنيه</p>
+            <button onclick="addToCart('قصص الأنبياء',7000)">🛒 شراء</button>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- السلة -->
+
+<section class="section">
+
+    <div class="card">
+
+        <h2 class="section-title">🛒 سلة المشتريات</h2>
+
+        <div id="cart">
+            السلة فارغة
+        </div>
+
+        <div id="total">
+            المجموع: 0 جنيه
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- إتمام الشراء -->
+
+<section class="section">
+
+    <div class="card">
+
+        <h2 class="section-title">📝 إتمام الشراء</h2>
+
+        <div class="form-group">
+            <label>الاسم:</label>
+            <input type="text" id="name" placeholder="اكتب اسمك">
+        </div>
+
+        <div class="form-group">
+            <label>البريد الإلكتروني:</label>
+            <input type="email" id="email" placeholder="اكتب البريد الإلكتروني">
+        </div>
+
+        <div class="form-group">
+
+            <label>💳 طريقة الدفع:</label>
+
+            <div class="payment-box">
+
+                <label class="payment-option">
+                    <input type="radio" name="payment" value="تحويل بنكي">
+                    تحويل بنكي
+                </label>
+
+                <label class="payment-option">
+                    <input type="radio" name="payment" value="دفع إلكتروني">
+                    دفع إلكتروني
+                </label>
+
+            </div>
+
+        </div>
+
+        <button class="confirm" onclick="checkout()">
+            ✅ تأكيد الشراء
+        </button>
+
+        <p id="message"></p>
+
+    </div>
+
+</section>
+
 
 <div id="orderSummary"></div>
 
 
-<div class="book">
-<img src="images/book.jpg" alt="غلاف كتاب البرمجة">
-    <h2>البرمجة</h2>
-    <p>السعر: 5000 جنيه</p>
-    <button onclick="addToCart('البرمجة', 5000)">شراء</button>
-</div>
+<footer>
+    📚 عالم الكتب
+    <br>
+    <small>متجر الكتب الإلكتروني</small>
+</footer>
 
-<div class="book">
-    <h2>قواعد البيانات</h2>
-    <p>السعر: 7000 جنيه</p>
-    <button onclick="addToCart('قواعد البيانات', 7000)">شراء</button>
-</div>
-
-<div class="book">
-    <h2>رواية موسم الهجرة إلى الشمال</h2>
-    <p>السعر: 8000 جنيه</p>
-    <button onclick="addToCart('رواية موسم الهجرة إلى الشمال', 8000)">شراء</button>
-</div>
-
-<div class="book">
-    <h2>تجارة إلكترونية</h2>
-    <p>السعر: 7000 جنيه</p>
-    <button onclick="addToCart('تجارة إلكترونية', 7000)">شراء</button>
-</div>
-
-<div class="book">
-    <h2>تاريخ السودان</h2>
-    <p>السعر: 9000 جنيه</p>
-    <button onclick="addToCart('تاريخ السودان', 9000)">شراء</button>
-</div>
-
-<div class="book">
-    <h2>القرآن الكريم</h2>
-    <p>السعر: 6000 جنيه</p>
-    <button onclick="addToCart('القرآن الكريم', 6000)">شراء</button>
-</div>
-
-<div class="book">
-    <h2>قصص الأنبياء</h2>
-    <p>السعر: 7000 جنيه</p>
-    <button onclick="addToCart('قصص الأنبياء', 7000)">شراء</button>
-</div>
 
 <script>
 
-    // تهيئة EmailJS
-    emailjs.init({
-        publicKey: "Dn6u4dJZDv6f5zowI"
-    });
+/* EmailJS */
 
-    let cart = [];
-    let total = 0;
+emailjs.init({
+    publicKey: "Dn6u4dJZDv6f5zowI"
+});
 
 
-    function addToCart(book, price) {
+let cart = [];
+let total = 0;
 
-        let existingBook = cart.find(item => item.name === book);
 
-        if (existingBook) {
+/* إضافة كتاب */
 
-            existingBook.quantity++;
+function addToCart(book, price) {
 
-        } else {
+    let existingBook =
+        cart.find(item => item.name === book);
 
-            cart.push({
-                name: book,
-                price: price,
-                quantity: 1
-            });
+    if (existingBook) {
 
-        }
+        existingBook.quantity++;
 
-        calculateTotal();
-        showCart();
-    }
+    } else {
 
-
-    function calculateTotal() {
-
-        total = cart.reduce(
-            (sum, item) => sum + (item.price * item.quantity),
-            0
-        );
-    }
-
-
-    function removeFromCart(index) {
-
-        cart.splice(index, 1);
-
-        calculateTotal();
-        showCart();
-    }
-
-
-    function showCart() {
-
-        if (cart.length === 0) {
-
-            document.getElementById("cart").innerHTML =
-                "السلة فارغة";
-
-        } else {
-
-            document.getElementById("cart").innerHTML =
-
-                cart.map((item, index) =>
-
-                    "📚 " + item.name +
-                    " — " +
-                    item.price + " جنيه" +
-                    " × " +
-                    item.quantity +
-
-                    ' <button onclick="removeFromCart(' +
-                    index +
-                    ')">حذف</button>'
-
-                ).join("<br><br>");
-        }
-
-
-        document.getElementById("total").innerHTML =
-            "المجموع: " + total + " جنيه";
-    }
-
-
-    function checkout() {
-
-        let name =
-            document.getElementById("name").value.trim();
-
-        let email =
-            document.getElementById("email").value.trim();
-
-        let payment =
-            document.querySelector(
-                'input[name="payment"]:checked'
-            );
-
-
-        if (name === "" || email === "" || payment === null) {
-
-            document.getElementById("message").innerHTML =
-                "⚠️ يرجى إكمال البيانات واختيار طريقة الدفع";
-
-            return;
-        }
-
-
-        if (cart.length === 0) {
-
-            document.getElementById("message").innerHTML =
-                "⚠️ يرجى إضافة كتاب إلى السلة أولاً";
-
-            return;
-        }
-
-
-        // إنشاء رقم الطلب
-        let orderId =
-            "BOOK-" + Date.now();
-
-
-        // إنشاء تفاصيل الكتب
-        let books = cart.map(item => {
-
-            let subtotal =
-                item.price * item.quantity;
-
-            return (
-                "📚 " +
-                item.name +
-                " | السعر: " +
-                item.price +
-                " جنيه | الكمية: " +
-                item.quantity +
-                " | المجموع: " +
-                subtotal +
-                " جنيه"
-            );
-
-        }).join("\n");
-
-
-        // البيانات المرسلة إلى EmailJS
-        let templateParams = {
-
-            name: name,
-
-            email: email,
-
-            books: books,
-
-            total: total + " جنيه",
-
-            payment: payment.value,
-
-            order_id: orderId
-        };
-
-
-        document.getElementById("message").innerHTML =
-            "⏳ جاري إرسال تفاصيل الطلب...";
-
-
-        emailjs.send(
-            "service_alamalkotob",
-            "template_nbm4c8o",
-            templateParams
-        )
-
-        .then(function(response) {
-
-            document.getElementById("message").innerHTML =
-                "✅ تم تسجيل الطلب وإرسال التفاصيل بنجاح";
-
-
-            // عرض ملخص الطلب في المتجر
-            document.getElementById("orderSummary").innerHTML =
-
-                "<h2>📋 ملخص الطلب</h2>" +
-
-                "<p><strong>رقم الطلب:</strong> " +
-                orderId +
-                "</p>" +
-
-                "<p><strong>الاسم:</strong> " +
-                name +
-                "</p>" +
-
-                "<p><strong>البريد الإلكتروني:</strong> " +
-                email +
-                "</p>" +
-
-                "<p><strong>الكتب:</strong></p>" +
-
-                "<p>" +
-
-                cart.map(item =>
-
-                    "📚 " +
-                    item.name +
-                    "<br>" +
-                    "السعر: " +
-                    item.price +
-                    " جنيه" +
-                    "<br>" +
-                    "الكمية: " +
-                    item.quantity +
-                    "<br>" +
-                    "المجموع: " +
-                    (item.price * item.quantity) +
-                    " جنيه"
-
-                ).join("<br><br>") +
-
-                "</p>" +
-
-                "<p><strong>💰 الإجمالي: </strong>" +
-                total +
-                " جنيه</p>" +
-
-                "<p><strong>💳 طريقة الدفع:</strong> " +
-                payment.value +
-                "</p>";
-
-        })
-
-        .catch(function(error) {
-
-            document.getElementById("message").innerHTML =
-                "❌ حدث خطأ أثناء إرسال الطلب. تأكدي من إعدادات EmailJS.";
-
-            console.log("EmailJS Error:", error);
+        cart.push({
+            name: book,
+            price: price,
+            quantity: 1
         });
 
     }
 
-</script></body>
+    calculateTotal();
+    showCart();
+}
+
+
+/* حساب المجموع */
+
+function calculateTotal() {
+
+    total = cart.reduce(
+        (sum, item) => sum + (item.price * item.quantity),
+        0
+    );
+
+}
+
+
+/* حذف كتاب */
+
+function removeFromCart(index) {
+
+    cart.splice(index, 1);
+
+    calculateTotal();
+    showCart();
+}
+
+
+/* عرض السلة */
+
+function showCart() {
+
+    if (cart.length === 0) {
+
+        document.getElementById("cart").innerHTML =
+            "🛒 السلة فارغة";
+
+    } else {
+
+        document.getElementById("cart").innerHTML =
+
+            cart.map((item, index) =>
+
+                "📚 <strong>" +
+                item.name +
+                "</strong> — " +
+                item.price +
+                " جنيه × " +
+                item.quantity +
+
+                ' <button onclick="removeFromCart(' +
+                index +
+                ')">حذف</button>'
+
+            ).join("<br><br>");
+    }
+
+    document.getElementById("total").innerHTML =
+        "💰 المجموع: " + total + " جنيه";
+}
+
+
+/* إتمام الشراء */
+
+function checkout() {
+
+    let name =
+        document.getElementById("name").value.trim();
+
+    let email =
+        document.getElementById("email").value.trim();
+
+    let payment =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        );
+
+
+    if (
+        name === "" ||
+        email === "" ||
+        payment === null
+    ) {
+
+        document.getElementById("message").innerHTML =
+            "⚠️ يرجى إكمال البيانات واختيار طريقة الدفع";
+
+        return;
+    }
+
+
+    if (cart.length === 0) {
+
+        document.getElementById("message").innerHTML =
+            "⚠️ يرجى إضافة كتاب إلى السلة أولاً";
+
+        return;
+    }
+
+
+    let orderId =
+        "BOOK-" + Date.now();
+
+
+    let books = cart.map(item => {
+
+        let subtotal =
+            item.price * item.quantity;
+
+        return (
+            "📚 " +
+            item.name +
+            " | السعر: " +
+            item.price +
+            " جنيه | الكمية: " +
+            item.quantity +
+            " | المجموع: " +
+            subtotal +
+            " جنيه"
+        );
+
+    }).join("\n");
+
+
+    let templateParams = {
+
+        name: name,
+        email: email,
+        books: books,
+        total: total + " جنيه",
+        payment: payment.value,
+        order_id: orderId
+
+    };
+
+
+    document.getElementById("message").innerHTML =
+        "⏳ جاري إرسال تفاصيل الطلب...";
+
+
+    emailjs.send(
+        "service_alamalkotob",
+        "template_nbm4c8o",
+        templateParams
+    )
+
+    .then(function() {
+
+        document.getElementById("message").innerHTML =
+            "✅ تم تسجيل الطلب وإرسال التفاصيل بنجاح";
+
+
+        document.getElementById("orderSummary").innerHTML =
+
+            "<h2>📋 ملخص الطلب</h2>" +
+
+            "<p><strong>رقم الطلب:</strong> " +
+            orderId +
+            "</p>" +
+
+            "<p><strong>الاسم:</strong> " +
+            name +
+            "</p>" +
+
+            "<p><strong>البريد الإلكتروني:</strong> " +
+            email +
+            "</p>" +
+
+            "<p><strong>الكتب:</strong></p>" +
+
+            "<p>" +
+
+            cart.map(item =>
+
+                "📚 " +
+                item.name +
+                "<br>" +
+                "السعر: " +
+                item.price +
+                " جنيه" +
+                "<br>" +
+                "الكمية: " +
+                item.quantity +
+                "<br>" +
+                "المجموع: " +
+                (item.price * item.quantity) +
+                " جنيه"
+
+            ).join("<br><br>") +
+
+            "</p>" +
+
+            "<p><strong>💰 الإجمالي:</strong> " +
+            total +
+            " جنيه</p>" +
+
+            "<p><strong>💳 طريقة الدفع:</strong> " +
+            payment.value +
+            "</p>";
+
+    })
+
+    .catch(function(error) {
+
+        document.getElementById("message").innerHTML =
+            "❌ حدث خطأ أثناء إرسال الطلب.";
+
+        console.log("EmailJS Error:", error);
+
+    });
+
+}
+
+</script>
+
+</body>
 </html>
