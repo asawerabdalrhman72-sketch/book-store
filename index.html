@@ -1,0 +1,401 @@
+<!DOCTYPE html><html>
+<head>
+    <title>متجر الكتب</title><!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<style>
+    body {
+        font-family: "Tahoma", sans-serif;
+        background-color: #f5f5f5;
+        text-align: center;
+    }
+
+    h1 {
+        background-color: #6a4c93;
+        color: white;
+        padding: 20px;
+    }
+
+    h2 {
+        color: #333;
+    }
+
+    .book {
+        background-color: white;
+        margin: 15px auto;
+        padding: 20px;
+        border-radius: 15px;
+        width: 85%;
+        max-width: 350px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    }
+
+    button {
+        background-color: #6a4c93;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+    }
+
+    #cart {
+        background-color: white;
+        padding: 15px;
+        margin: 15px;
+        border-radius: 10px;
+    }
+
+    #total {
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    #orderSummary {
+        background-color: white;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 15px;
+        width: 85%;
+        max-width: 400px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    }
+
+    #orderSummary h2 {
+        color: #6a4c93;
+        margin-bottom: 15px;
+    }
+
+    #orderSummary p {
+        font-size: 16px;
+        line-height: 1.8;
+        color: #444;
+    }
+</style>
+
+</head><body><h1>📚 متجر الكتب</h1>
+
+<p>مرحباً بكم في متجرنا الإلكتروني</p>
+
+<h2>🛒 سلة المشتريات</h2>
+
+<p id="cart">السلة فارغة</p>
+
+<p id="total">المجموع: 0 جنيه</p>
+
+<h2>📝 إتمام الشراء</h2>
+
+<label>الاسم:</label>
+<br>
+<input type="text" id="name" placeholder="اكتبي اسمك">
+
+<br><br>
+
+<label>البريد الإلكتروني:</label>
+<br>
+<input type="email" id="email" placeholder="اكتبي البريد الإلكتروني">
+
+<br><br>
+
+<h3>💳 طريقة الدفع</h3>
+
+<label>
+    <input type="radio" name="payment" value="تحويل بنكي">
+    تحويل بنكي
+</label>
+
+<br>
+
+<label>
+    <input type="radio" name="payment" value="دفع إلكتروني">
+    دفع إلكتروني
+</label>
+
+<br><br>
+
+<button onclick="checkout()">تأكيد الشراء</button>
+
+<p id="message"></p>
+
+<div id="orderSummary"></div>
+
+
+<div class="book">
+    <h2>البرمجة</h2>
+    <p>السعر: 5000 جنيه</p>
+    <button onclick="addToCart('البرمجة', 5000)">شراء</button>
+</div>
+
+<div class="book">
+    <h2>قواعد البيانات</h2>
+    <p>السعر: 7000 جنيه</p>
+    <button onclick="addToCart('قواعد البيانات', 7000)">شراء</button>
+</div>
+
+<div class="book">
+    <h2>رواية موسم الهجرة إلى الشمال</h2>
+    <p>السعر: 8000 جنيه</p>
+    <button onclick="addToCart('رواية موسم الهجرة إلى الشمال', 8000)">شراء</button>
+</div>
+
+<div class="book">
+    <h2>تجارة إلكترونية</h2>
+    <p>السعر: 7000 جنيه</p>
+    <button onclick="addToCart('تجارة إلكترونية', 7000)">شراء</button>
+</div>
+
+<div class="book">
+    <h2>تاريخ السودان</h2>
+    <p>السعر: 9000 جنيه</p>
+    <button onclick="addToCart('تاريخ السودان', 9000)">شراء</button>
+</div>
+
+<div class="book">
+    <h2>القرآن الكريم</h2>
+    <p>السعر: 6000 جنيه</p>
+    <button onclick="addToCart('القرآن الكريم', 6000)">شراء</button>
+</div>
+
+<div class="book">
+    <h2>قصص الأنبياء</h2>
+    <p>السعر: 7000 جنيه</p>
+    <button onclick="addToCart('قصص الأنبياء', 7000)">شراء</button>
+</div>
+
+<script>
+
+    // تهيئة EmailJS
+    emailjs.init({
+        publicKey: "Dn6u4dJZDv6f5zowI"
+    });
+
+    let cart = [];
+    let total = 0;
+
+
+    function addToCart(book, price) {
+
+        let existingBook = cart.find(item => item.name === book);
+
+        if (existingBook) {
+
+            existingBook.quantity++;
+
+        } else {
+
+            cart.push({
+                name: book,
+                price: price,
+                quantity: 1
+            });
+
+        }
+
+        calculateTotal();
+        showCart();
+    }
+
+
+    function calculateTotal() {
+
+        total = cart.reduce(
+            (sum, item) => sum + (item.price * item.quantity),
+            0
+        );
+    }
+
+
+    function removeFromCart(index) {
+
+        cart.splice(index, 1);
+
+        calculateTotal();
+        showCart();
+    }
+
+
+    function showCart() {
+
+        if (cart.length === 0) {
+
+            document.getElementById("cart").innerHTML =
+                "السلة فارغة";
+
+        } else {
+
+            document.getElementById("cart").innerHTML =
+
+                cart.map((item, index) =>
+
+                    "📚 " + item.name +
+                    " — " +
+                    item.price + " جنيه" +
+                    " × " +
+                    item.quantity +
+
+                    ' <button onclick="removeFromCart(' +
+                    index +
+                    ')">حذف</button>'
+
+                ).join("<br><br>");
+        }
+
+
+        document.getElementById("total").innerHTML =
+            "المجموع: " + total + " جنيه";
+    }
+
+
+    function checkout() {
+
+        let name =
+            document.getElementById("name").value.trim();
+
+        let email =
+            document.getElementById("email").value.trim();
+
+        let payment =
+            document.querySelector(
+                'input[name="payment"]:checked'
+            );
+
+
+        if (name === "" || email === "" || payment === null) {
+
+            document.getElementById("message").innerHTML =
+                "⚠️ يرجى إكمال البيانات واختيار طريقة الدفع";
+
+            return;
+        }
+
+
+        if (cart.length === 0) {
+
+            document.getElementById("message").innerHTML =
+                "⚠️ يرجى إضافة كتاب إلى السلة أولاً";
+
+            return;
+        }
+
+
+        // إنشاء رقم الطلب
+        let orderId =
+            "BOOK-" + Date.now();
+
+
+        // إنشاء تفاصيل الكتب
+        let books = cart.map(item => {
+
+            let subtotal =
+                item.price * item.quantity;
+
+            return (
+                "📚 " +
+                item.name +
+                " | السعر: " +
+                item.price +
+                " جنيه | الكمية: " +
+                item.quantity +
+                " | المجموع: " +
+                subtotal +
+                " جنيه"
+            );
+
+        }).join("\n");
+
+
+        // البيانات المرسلة إلى EmailJS
+        let templateParams = {
+
+            name: name,
+
+            email: email,
+
+            books: books,
+
+            total: total + " جنيه",
+
+            payment: payment.value,
+
+            order_id: orderId
+        };
+
+
+        document.getElementById("message").innerHTML =
+            "⏳ جاري إرسال تفاصيل الطلب...";
+
+
+        emailjs.send(
+            "service_alamalkotob",
+            "template_nbm4c8o",
+            templateParams
+        )
+
+        .then(function(response) {
+
+            document.getElementById("message").innerHTML =
+                "✅ تم تسجيل الطلب وإرسال التفاصيل بنجاح";
+
+
+            // عرض ملخص الطلب في المتجر
+            document.getElementById("orderSummary").innerHTML =
+
+                "<h2>📋 ملخص الطلب</h2>" +
+
+                "<p><strong>رقم الطلب:</strong> " +
+                orderId +
+                "</p>" +
+
+                "<p><strong>الاسم:</strong> " +
+                name +
+                "</p>" +
+
+                "<p><strong>البريد الإلكتروني:</strong> " +
+                email +
+                "</p>" +
+
+                "<p><strong>الكتب:</strong></p>" +
+
+                "<p>" +
+
+                cart.map(item =>
+
+                    "📚 " +
+                    item.name +
+                    "<br>" +
+                    "السعر: " +
+                    item.price +
+                    " جنيه" +
+                    "<br>" +
+                    "الكمية: " +
+                    item.quantity +
+                    "<br>" +
+                    "المجموع: " +
+                    (item.price * item.quantity) +
+                    " جنيه"
+
+                ).join("<br><br>") +
+
+                "</p>" +
+
+                "<p><strong>💰 الإجمالي: </strong>" +
+                total +
+                " جنيه</p>" +
+
+                "<p><strong>💳 طريقة الدفع:</strong> " +
+                payment.value +
+                "</p>";
+
+        })
+
+        .catch(function(error) {
+
+            document.getElementById("message").innerHTML =
+                "❌ حدث خطأ أثناء إرسال الطلب. تأكدي من إعدادات EmailJS.";
+
+            console.log("EmailJS Error:", error);
+        });
+
+    }
+
+</script></body>
+</html>
