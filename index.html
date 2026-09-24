@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
-
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>عالم الكتب</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -21,47 +23,72 @@ body {
     color: #333;
 }
 
-/* الهيدر */
+/* ================= الهيدر ================= */
+
 header {
     background: linear-gradient(135deg, #6a4c93, #9270b5);
     color: white;
     text-align: center;
-    padding: 35px 15px;
+    padding: 45px 15px;
 }
 
 header h1 {
     margin: 0;
-    font-size: 35px;
+    font-size: 40px;
 }
 
 header p {
     margin: 12px 0 0;
-    font-size: 17px;
+    font-size: 18px;
 }
 
-/* العنوان */
+/* ================= الترحيب ================= */
+
 .welcome {
     text-align: center;
-    padding: 30px 15px 15px;
+    padding: 35px 15px 15px;
 }
 
 .welcome h2 {
     color: #6a4c93;
-    font-size: 28px;
+    font-size: 30px;
     margin: 0 0 10px;
 }
 
 .welcome p {
     color: #666;
+    font-size: 16px;
 }
 
-/* الكتب */
-.books-container {
+/* ================= معلومات المتجر ================= */
+
+.store-info {
     width: 92%;
     max-width: 1100px;
-    margin: 25px auto 45px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.info-box {
+    background: white;
+    padding: 15px 25px;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    color: #6a4c93;
+    font-weight: bold;
+}
+
+/* ================= الكتب ================= */
+
+.books-container {
+    width: 92%;
+    max-width: 1200px;
+    margin: 30px auto 60px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     gap: 25px;
 }
 
@@ -71,11 +98,17 @@ header p {
     overflow: hidden;
     text-align: center;
     box-shadow: 0 5px 18px rgba(0,0,0,0.10);
+    transition: 0.25s;
+}
+
+.book:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
 .book-image {
     width: 100%;
-    height: 230px;
+    height: 245px;
     object-fit: cover;
     display: block;
 }
@@ -87,16 +120,31 @@ header p {
 .book h2 {
     color: #3f3150;
     font-size: 20px;
+    margin: 8px 0;
     min-height: 45px;
+}
+
+.author {
+    color: #777;
+    font-size: 14px;
+    margin: 8px 0;
+}
+
+.description {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.8;
+    min-height: 75px;
 }
 
 .price {
     color: #6a4c93;
-    font-size: 18px;
+    font-size: 19px;
     font-weight: bold;
+    margin: 15px 0;
 }
 
-button {
+.buy-btn {
     background: #6a4c93;
     color: white;
     border: none;
@@ -106,59 +154,69 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.buy-btn:hover {
     background: #513673;
 }
 
-/* أعلام السودان */
-.sudan-flags {
-    font-size: 28px;
-    padding: 12px 0 0;
-    letter-spacing: 4px;
-}
+/* ================= الأقسام ================= */
 
-/* الأقسام */
 .section {
     width: 92%;
-    max-width: 800px;
-    margin: 25px auto;
+    max-width: 850px;
+    margin: 35px auto;
 }
 
 .card {
     background: white;
     border-radius: 18px;
-    padding: 25px;
+    padding: 28px;
     box-shadow: 0 5px 18px rgba(0,0,0,0.10);
 }
 
 .section-title {
     text-align: center;
     color: #6a4c93;
+    margin-top: 0;
+    font-size: 27px;
 }
 
-/* السلة */
+/* ================= السلة ================= */
+
 #cart {
     line-height: 2;
-    min-height: 40px;
+    min-height: 45px;
+}
+
+.cart-item {
+    background: #f7f2fb;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 10px;
 }
 
 #cart button {
     background: #c94c4c;
+    color: white;
+    border: none;
     padding: 6px 12px;
-    font-size: 13px;
+    border-radius: 7px;
+    cursor: pointer;
 }
 
 #total {
     text-align: center;
     color: #6a4c93;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
     margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid #ddd;
 }
 
-/* النموذج */
+/* ================= إتمام الطلب ================= */
+
 .form-group {
-    margin-bottom: 18px;
+    margin-bottom: 20px;
 }
 
 .form-group label {
@@ -170,15 +228,21 @@ button:hover {
 input[type="text"],
 input[type="email"] {
     width: 100%;
-    padding: 13px;
+    padding: 14px;
     border: 1px solid #ddd;
     border-radius: 9px;
     font-size: 15px;
+    outline: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+    border-color: #6a4c93;
 }
 
 .payment-box {
     background: #f7f2fb;
-    padding: 15px;
+    padding: 16px;
     border-radius: 12px;
 }
 
@@ -189,7 +253,17 @@ input[type="email"] {
 
 .confirm {
     width: 100%;
+    background: #6a4c93;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
     font-size: 17px;
+    cursor: pointer;
+}
+
+.confirm:hover {
+    background: #513673;
 }
 
 #message {
@@ -198,12 +272,13 @@ input[type="email"] {
     margin-top: 18px;
 }
 
-/* ملخص الطلب */
+/* ================= ملخص الطلب ================= */
+
 #orderSummary {
     width: 92%;
-    max-width: 800px;
-    margin: 30px auto 50px;
-    padding: 25px;
+    max-width: 850px;
+    margin: 35px auto 55px;
+    padding: 28px;
     background: white;
     border-radius: 18px;
     box-shadow: 0 5px 18px rgba(0,0,0,0.10);
@@ -218,18 +293,26 @@ input[type="email"] {
     line-height: 2;
 }
 
-/* الفوتر */
+/* ================= الفوتر ================= */
+
 footer {
     background: #3f3150;
     color: white;
     text-align: center;
-    padding: 22px;
+    padding: 28px;
+    margin-top: 50px;
 }
 
-/* الهاتف */
+footer small {
+    opacity: 0.8;
+}
+
+/* ================= الهاتف ================= */
+
 @media (max-width: 600px) {
+
     header h1 {
-        font-size: 29px;
+        font-size: 30px;
     }
 
     .books-container {
@@ -237,239 +320,1116 @@ footer {
     }
 
     .book-image {
-        height: 260px;
+        height: 280px;
     }
+
+    .description {
+        min-height: auto;
+    }
+
 }
+
 </style>
 
 </head>
 
 <body>
 
+
+<!-- ================= الهيدر ================= -->
+
 <header>
-    <h1>📚 عالم الكتب</h1>
-    <p>اكتشف عالمًا من المعرفة والقصص بين يديك</p>
+
+<h1>📚 عالم الكتب</h1>
+
+<p>
+اكتشف عالمًا من المعرفة والقصص بين يديك
+</p>
+
 </header>
 
+
+<!-- ================= الترحيب ================= -->
+
 <section class="welcome">
-    <h2>📖 كتبنا المميزة</h2>
-    <p>اختر كتابك المفضل وأضفه إلى سلة المشتريات</p>
+
+<h2>📖 كتبنا المميزة</h2>
+
+<p>
+اختر كتابك المفضل واستمتع بتجربة شراء سهلة ومميزة
+</p>
+
 </section>
 
 
-<!-- الكتب -->
+<!-- ================= معلومات المتجر ================= -->
 
-<div class="books-container">
+<div class="store-info">
 
-    <!-- البرمجة -->
-    <div class="book">
-        <img class="book-image"
-        src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=600&q=80"
-        alt="كتاب البرمجة">
+<div class="info-box">
+📚 أكثر من 30 كتاب
+</div>
 
-        <div class="book-content">
-            <h2>البرمجة</h2>
-            <p class="price">5000 جنيه</p>
-            <button onclick="addToCart('البرمجة',5000)">🛒 شراء</button>
-        </div>
-    </div>
+<div class="info-box">
+🚚 خدمة إلكترونية سهلة
+</div>
 
-
-    <!-- قواعد البيانات -->
-    <div class="book">
-        <img class="book-image"
-        src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=600&q=80"
-        alt="قواعد البيانات">
-
-        <div class="book-content">
-            <h2>قواعد البيانات</h2>
-            <p class="price">7000 جنيه</p>
-            <button onclick="addToCart('قواعد البيانات',7000)">🛒 شراء</button>
-        </div>
-    </div>
-
-
-    <!-- موسم الهجرة إلى الشمال -->
-    <div class="book">
-        <img class="book-image"
-        src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=600&q=80"
-        alt="موسم الهجرة إلى الشمال">
-
-        <div class="book-content">
-            <h2>موسم الهجرة إلى الشمال</h2>
-            <p class="price">8000 جنيه</p>
-            <button onclick="addToCart('رواية موسم الهجرة إلى الشمال',8000)">🛒 شراء</button>
-        </div>
-    </div>
-
-
-    <!-- تجارة إلكترونية -->
-    <div class="book">
-        <img class="book-image"
-        src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&q=80"
-        alt="تجارة إلكترونية">
-
-        <div class="book-content">
-            <h2>تجارة إلكترونية</h2>
-            <p class="price">7000 جنيه</p>
-            <button onclick="addToCart('تجارة إلكترونية',7000)">🛒 شراء</button>
-        </div>
-    </div>
-
-
-    <!-- تاريخ السودان -->
-    <div class="book">
-
-        <img class="book-image"
-        src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=600&q=80"
-        alt="كتاب تاريخ السودان">
-
-        <div class="sudan-flags">
-            🇸🇩 🇸🇩 🇸🇩
-        </div>
-
-        <div class="book-content">
-            <h2>تاريخ السودان 🇸🇩</h2>
-            <p class="price">9000 جنيه</p>
-            <button onclick="addToCart('تاريخ السودان',9000)">🛒 شراء</button>
-        </div>
-
-    </div>
-
-
-    <!-- القرآن الكريم -->
-    <div class="book">
-
-        <img class="book-image"
-        src="https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=600&q=80"
-        alt="القرآن الكريم">
-
-        <div class="book-content">
-            <h2>القرآن الكريم</h2>
-            <p class="price">6000 جنيه</p>
-            <button onclick="addToCart('القرآن الكريم',6000)">🛒 شراء</button>
-        </div>
-
-    </div>
-
-
-    <!-- قصص الأنبياء -->
-    <div class="book">
-
-        <img class="book-image"
-        src="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=600&q=80"
-        alt="كتاب قصص الأنبياء">
-
-        <div class="book-content">
-            <h2>قصص الأنبياء</h2>
-            <p class="price">7000 جنيه</p>
-            <button onclick="addToCart('قصص الأنبياء',7000)">🛒 شراء</button>
-        </div>
-
-    </div>
+<div class="info-box">
+🔒 طلب آمن
+</div>
 
 </div>
 
 
-<!-- السلة -->
+<!-- ================= الكتب ================= -->
+
+<div class="books-container">
+
+
+<!-- 1 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=600&q=80"
+alt="تعلم البرمجة">
+
+<div class="book-content">
+
+<h2>تعلم البرمجة</h2>
+
+<p class="author">✍️ المؤلف: أحمد علي</p>
+
+<p class="description">
+كتاب مبسط يساعد المبتدئين على فهم أساسيات البرمجة وكتابة البرامج خطوة بخطوة.
+</p>
+
+<p class="price">18,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('تعلم البرمجة',18000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 2 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=600&q=80"
+alt="قواعد البيانات">
+
+<div class="book-content">
+
+<h2>قواعد البيانات</h2>
+
+<p class="author">✍️ المؤلف: محمد حسن</p>
+
+<p class="description">
+كتاب يشرح مفاهيم قواعد البيانات والجداول والعلاقات والاستعلامات بطريقة سهلة.
+</p>
+
+<p class="price">17,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('قواعد البيانات',17000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 3 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=600&q=80"
+alt="موسم الهجرة إلى الشمال">
+
+<div class="book-content">
+
+<h2>موسم الهجرة إلى الشمال</h2>
+
+<p class="author">✍️ المؤلف: الطيب صالح</p>
+
+<p class="description">
+رواية سودانية شهيرة تتناول الهوية والاغتراب والعلاقة بين الثقافات المختلفة.
+</p>
+
+<p class="price">20,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('موسم الهجرة إلى الشمال',20000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 4 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=600&q=80"
+alt="الذكاء الاصطناعي">
+
+<div class="book-content">
+
+<h2>الذكاء الاصطناعي</h2>
+
+<p class="author">✍️ المؤلف: سامر أحمد</p>
+
+<p class="description">
+مقدمة مبسطة في الذكاء الاصطناعي وتعلم الآلة والشبكات العصبية وتطبيقاتها.
+</p>
+
+<p class="price">20,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('الذكاء الاصطناعي',20000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 5 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=600&q=80"
+alt="تاريخ السودان">
+
+<div class="book-content">
+
+<h2>تاريخ السودان 🇸🇩</h2>
+
+<p class="author">✍️ المؤلف: خالد عمر</p>
+
+<p class="description">
+رحلة مختصرة عبر أهم المراحل والأحداث التي شكلت تاريخ السودان.
+</p>
+
+<p class="price">18,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('تاريخ السودان',18000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 6 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1511108690759-009324a90311?auto=format&fit=crop&w=600&q=80"
+alt="عائد إلى حيفا">
+
+<div class="book-content">
+
+<h2>عائد إلى حيفا</h2>
+
+<p class="author">✍️ المؤلف: غسان كنفاني</p>
+
+<p class="description">
+رواية إنسانية تناقش الفقد والتهجير والهوية والانتماء.
+</p>
+
+<p class="price">16,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('عائد إلى حيفا',16000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 7 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80"
+alt="رجال في الشمس">
+
+<div class="book-content">
+
+<h2>رجال في الشمس</h2>
+
+<p class="author">✍️ المؤلف: غسان كنفاني</p>
+
+<p class="description">
+رواية أدبية قصيرة ذات طابع إنساني واجتماعي مليئة بالتأملات والأسئلة.
+</p>
+
+<p class="price">17,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('رجال في الشمس',17000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 8 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=600&q=80"
+alt="الأيام">
+
+<div class="book-content">
+
+<h2>الأيام</h2>
+
+<p class="author">✍️ المؤلف: طه حسين</p>
+
+<p class="description">
+سيرة أدبية تحكي رحلة الكاتب في الحياة والتعليم وتطور تجربته الفكرية.
+</p>
+
+<p class="price">15,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('الأيام',15000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 9 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=600&q=80"
+alt="العادات الذرية">
+
+<div class="book-content">
+
+<h2>العادات الذرية</h2>
+
+<p class="author">✍️ المؤلف: James Clear</p>
+
+<p class="description">
+كتاب عن بناء العادات الصغيرة وتحسين السلوك اليومي من خلال خطوات بسيطة.
+</p>
+
+<p class="price">20,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('العادات الذرية',20000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 10 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=600&q=80"
+alt="قوة التفكير الإيجابي">
+
+<div class="book-content">
+
+<h2>قوة التفكير الإيجابي</h2>
+
+<p class="author">✍️ المؤلف: Norman Vincent Peale</p>
+
+<p class="description">
+كتاب يناقش طرق تطوير التفكير والتعامل مع التحديات اليومية بصورة أكثر إيجابية.
+</p>
+
+<p class="price">16,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('قوة التفكير الإيجابي',16000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 11 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80"
+alt="English Grammar">
+
+<div class="book-content">
+
+<h2>English Grammar</h2>
+
+<p class="author">✍️ المؤلف: Sarah Miller</p>
+
+<p class="description">
+A beginner-friendly book that introduces the basic rules of English grammar.
+</p>
+
+<p class="price">15,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('English Grammar',15000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 12 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=600&q=80"
+alt="Learn English">
+
+<div class="book-content">
+
+<h2>Learn English</h2>
+
+<p class="author">✍️ المؤلف: John Smith</p>
+
+<p class="description">
+A practical book for improving English vocabulary, reading and everyday communication.
+</p>
+
+<p class="price">16,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('Learn English',16000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 13 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=600&q=80"
+alt="The Great Gatsby">
+
+<div class="book-content">
+
+<h2>The Great Gatsby</h2>
+
+<p class="author">✍️ المؤلف: F. Scott Fitzgerald</p>
+
+<p class="description">
+A classic novel about dreams, relationships and life in the 1920s.
+</p>
+
+<p class="price">18,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('The Great Gatsby',18000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 14 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=600&q=80"
+alt="Pride and Prejudice">
+
+<div class="book-content">
+
+<h2>Pride and Prejudice</h2>
+
+<p class="author">✍️ المؤلف: Jane Austen</p>
+
+<p class="description">
+A classic story about relationships, family, society and personal choices.
+</p>
+
+<p class="price">19,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('Pride and Prejudice',19000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 15 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80"
+alt="Little Women">
+
+<div class="book-content">
+
+<h2>Little Women</h2>
+
+<p class="author">✍️ المؤلف: Louisa May Alcott</p>
+
+<p class="description">
+A classic story about family, friendship, growing up and following dreams.
+</p>
+
+<p class="price">18,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('Little Women',18000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 16 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1511108690759-009324a90311?auto=format&fit=crop&w=600&q=80"
+alt="Harry Potter">
+
+<div class="book-content">
+
+<h2>Harry Potter</h2>
+
+<p class="author">✍️ المؤلف: J. K. Rowling</p>
+
+<p class="description">
+A fantasy story about friendship, courage and a young wizard discovering his world.
+</p>
+
+<p class="price">20,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('Harry Potter',20000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 17 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=600&q=80"
+alt="Animal Farm">
+
+<div class="book-content">
+
+<h2>Animal Farm</h2>
+
+<p class="author">✍️ المؤلف: George Orwell</p>
+
+<p class="description">
+A famous English novel that explores power, society and political change.
+</p>
+
+<p class="price">17,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('Animal Farm',17000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 18 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=600&q=80"
+alt="1984">
+
+<div class="book-content">
+
+<h2>1984</h2>
+
+<p class="author">✍️ المؤلف: George Orwell</p>
+
+<p class="description">
+A classic dystopian novel exploring surveillance, freedom and society.
+</p>
+
+<p class="price">19,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('1984',19000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 19 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=600&q=80"
+alt="The Alchemist">
+
+<div class="book-content">
+
+<h2>The Alchemist</h2>
+
+<p class="author">✍️ المؤلف: Paulo Coelho</p>
+
+<p class="description">
+A novel about dreams, personal journeys and the search for meaning.
+</p>
+
+<p class="price">18,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('The Alchemist',18000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 20 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=600&q=80"
+alt="Atomic Habits">
+
+<div class="book-content">
+
+<h2>Atomic Habits</h2>
+
+<p class="author">✍️ المؤلف: James Clear</p>
+
+<p class="description">
+A practical guide to building better habits through small and consistent changes.
+</p>
+
+<p class="price">20,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('Atomic Habits',20000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 21 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=600&q=80"
+alt="Python للمبتدئين">
+
+<div class="book-content">
+
+<h2>Python للمبتدئين</h2>
+
+<p class="author">✍️ المؤلف: محمد خالد</p>
+
+<p class="description">
+كتاب عملي لتعلم أساسيات لغة Python من الصفر مع أمثلة وتمارين بسيطة.
+</p>
+
+<p class="price">18,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('Python للمبتدئين',18000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 22 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80"
+alt="الشبكات والحاسوب">
+
+<div class="book-content">
+
+<h2>الشبكات والحاسوب</h2>
+
+<p class="author">✍️ المؤلف: أحمد محمود</p>
+
+<p class="description">
+مقدمة في شبكات الحاسوب ومكوناتها والبروتوكولات الأساسية وطريقة عملها.
+</p>
+
+<p class="price">17,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('الشبكات والحاسوب',17000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 23 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80"
+alt="أساسيات الأمن السيبراني">
+
+<div class="book-content">
+
+<h2>أساسيات الأمن السيبراني</h2>
+
+<p class="author">✍️ المؤلف: عمر عبد الله</p>
+
+<p class="description">
+كتاب تمهيدي للتعرف على أمن المعلومات والتهديدات وطرق حماية الأنظمة.
+</p>
+
+<p class="price">20,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('أساسيات الأمن السيبراني',20000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 24 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1456324504439-367cee3b3c4?auto=format&fit=crop&w=600&q=80"
+alt="إدارة الوقت">
+
+<div class="book-content">
+
+<h2>إدارة الوقت</h2>
+
+<p class="author">✍️ المؤلف: سارة محمد</p>
+
+<p class="description">
+دليل عملي يساعد على تنظيم الوقت وترتيب الأولويات وتحسين الإنتاجية.
+</p>
+
+<p class="price">15,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('إدارة الوقت',15000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 25 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80"
+alt="مهارات النجاح">
+
+<div class="book-content">
+
+<h2>مهارات النجاح</h2>
+
+<p class="author">✍️ المؤلف: علي حسن</p>
+
+<p class="description">
+كتاب يتناول مهارات التخطيط والتواصل والتعلم والعمل لتحقيق الأهداف.
+</p>
+
+<p class="price">16,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('مهارات النجاح',16000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 26 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1461360370896-922624d12b48?auto=format&fit=crop&w=600&q=80"
+alt="تاريخ الحضارات">
+
+<div class="book-content">
+
+<h2>تاريخ الحضارات</h2>
+
+<p class="author">✍️ المؤلف: يوسف أحمد</p>
+
+<p class="description">
+جولة تاريخية في عدد من الحضارات القديمة وتطور المجتمعات عبر الزمن.
+</p>
+
+<p class="price">18,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('تاريخ الحضارات',18000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 27 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=600&q=80"
+alt="أرض زيكولا">
+
+<div class="book-content">
+
+<h2>أرض زيكولا</h2>
+
+<p class="author">✍️ المؤلف: عمرو عبد الحميد</p>
+
+<p class="description">
+رواية خيالية تدور في عالم مختلف تحكمه قواعد خاصة للقيمة والثروة.
+</p>
+
+<p class="price">19,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('أرض زيكولا',19000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 28 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80"
+alt="الفيل الأزرق">
+
+<div class="book-content">
+
+<h2>الفيل الأزرق</h2>
+
+<p class="author">✍️ المؤلف: أحمد مراد</p>
+
+<p class="description">
+رواية غامضة تجمع بين التشويق والتحقيق والأحداث النفسية.
+</p>
+
+<p class="price">20,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('الفيل الأزرق',20000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 29 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=600&q=80"
+alt="في قلبي أنثى عبرية">
+
+<div class="book-content">
+
+<h2>في قلبي أنثى عبرية</h2>
+
+<p class="author">✍️ المؤلف: خولة حمدي</p>
+
+<p class="description">
+رواية اجتماعية تتناول العلاقات الإنسانية والاختلافات الثقافية.
+</p>
+
+<p class="price">18,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('في قلبي أنثى عبرية',18000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+<!-- 30 -->
+
+<div class="book">
+
+<img class="book-image"
+src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=600&q=80"
+alt="فن التعلم">
+
+<div class="book-content">
+
+<h2>فن التعلم</h2>
+
+<p class="author">✍️ المؤلف: أحمد إبراهيم</p>
+
+<p class="description">
+كتاب يساعد الطلاب على تنظيم الدراسة وتحسين التركيز وتطوير مهارات التعلم.
+</p>
+
+<p class="price">15,000 جنيه</p>
+
+<button class="buy-btn"
+onclick="addToCart('فن التعلم',15000)">
+🛒 أضف للسلة
+</button>
+
+</div>
+</div>
+
+
+</div>
+
+
+<!-- ==================================================
+     السلة - أسفل الكتب
+================================================== -->
 
 <section class="section">
 
-    <div class="card">
+<div class="card">
 
-        <h2 class="section-title">🛒 سلة المشتريات</h2>
+<h2 class="section-title">
+🛒 سلة المشتريات
+</h2>
 
-        <div id="cart">
-            السلة فارغة
-        </div>
+<div id="cart">
+🛒 السلة فارغة
+</div>
 
-        <div id="total">
-            المجموع: 0 جنيه
-        </div>
+<div id="total">
+💰 المجموع: 0 جنيه
+</div>
 
-    </div>
+</div>
 
 </section>
 
 
-<!-- إتمام الشراء -->
+<!-- ==================================================
+     إتمام الشراء - أسفل السلة
+================================================== -->
 
 <section class="section">
 
-    <div class="card">
+<div class="card">
 
-        <h2 class="section-title">📝 إتمام الشراء</h2>
+<h2 class="section-title">
+📝 إتمام الشراء
+</h2>
 
-        <div class="form-group">
-            <label>الاسم:</label>
-            <input type="text" id="name" placeholder="اكتب اسمك">
-        </div>
 
-        <div class="form-group">
-            <label>البريد الإلكتروني:</label>
-            <input type="email" id="email" placeholder="اكتب البريد الإلكتروني">
-        </div>
+<div class="form-group">
 
-        <div class="form-group">
+<label>
+الاسم:
+</label>
 
-            <label>💳 طريقة الدفع:</label>
+<input
+type="text"
+id="name"
+placeholder="اكتب اسمك">
 
-            <div class="payment-box">
+</div>
 
-                <label class="payment-option">
-                    <input type="radio" name="payment" value="تحويل بنكي">
-                    تحويل بنكي
-                </label>
 
-                <label class="payment-option">
-                    <input type="radio" name="payment" value="دفع إلكتروني">
-                    دفع إلكتروني
-                </label>
+<div class="form-group">
 
-            </div>
+<label>
+البريد الإلكتروني:
+</label>
 
-        </div>
+<input
+type="email"
+id="email"
+placeholder="اكتب البريد الإلكتروني">
 
-        <button class="confirm" onclick="checkout()">
-            ✅ تأكيد الشراء
-        </button>
+</div>
 
-        <p id="message"></p>
 
-    </div>
+<div class="form-group">
+
+<label>
+💳 طريقة الدفع:
+</label>
+
+<div class="payment-box">
+
+
+<label class="payment-option">
+
+<input
+type="radio"
+name="payment"
+value="تحويل بنكي">
+
+تحويل بنكي
+
+</label>
+
+
+<label class="payment-option">
+
+<input
+type="radio"
+name="payment"
+value="دفع إلكتروني">
+
+دفع إلكتروني
+
+</label>
+
+
+</div>
+
+</div>
+
+
+<button
+class="confirm"
+onclick="checkout()">
+
+✅ تأكيد الشراء
+
+</button>
+
+
+<p id="message"></p>
+
+</div>
 
 </section>
 
+
+<!-- ==================================================
+     ملخص الطلب
+================================================== -->
 
 <div id="orderSummary"></div>
 
 
+<!-- ================= الفوتر ================= -->
+
 <footer>
-    📚 عالم الكتب
-    <br>
-    <small>متجر الكتب الإلكتروني</small>
+
+📚 عالم الكتب
+
+<br>
+
+<small>
+متجر الكتب الإلكتروني
+</small>
+
 </footer>
 
 
 <script>
 
-/* EmailJS */
+/* ==================================================
+   EMAILJS
+================================================== */
 
 emailjs.init({
     publicKey: "Dn6u4dJZDv6f5zowI"
 });
 
 
+/* ==================================================
+   السلة
+================================================== */
+
 let cart = [];
+
 let total = 0;
 
 
-/* إضافة كتاب */
+/* ==================================================
+   إضافة كتاب للسلة
+================================================== */
 
 function addToCart(book, price) {
 
     let existingBook =
         cart.find(item => item.name === book);
+
 
     if (existingBook) {
 
@@ -478,90 +1438,154 @@ function addToCart(book, price) {
     } else {
 
         cart.push({
+
             name: book,
+
             price: price,
+
             quantity: 1
+
         });
 
     }
 
+
     calculateTotal();
+
     showCart();
+
 }
 
 
-/* حساب المجموع */
+/* ==================================================
+   حساب المجموع
+================================================== */
 
 function calculateTotal() {
 
     total = cart.reduce(
-        (sum, item) => sum + (item.price * item.quantity),
+
+        (sum, item) =>
+
+        sum + (item.price * item.quantity),
+
         0
+
     );
 
 }
 
 
-/* حذف كتاب */
+/* ==================================================
+   حذف كتاب
+================================================== */
 
 function removeFromCart(index) {
 
     cart.splice(index, 1);
 
     calculateTotal();
+
     showCart();
+
 }
 
 
-/* عرض السلة */
+/* ==================================================
+   عرض السلة
+================================================== */
 
 function showCart() {
 
+    let cartElement =
+        document.getElementById("cart");
+
+
     if (cart.length === 0) {
 
-        document.getElementById("cart").innerHTML =
+        cartElement.innerHTML =
             "🛒 السلة فارغة";
 
     } else {
 
-        document.getElementById("cart").innerHTML =
+        cartElement.innerHTML =
 
-            cart.map((item, index) =>
+            cart.map((item, index) => `
 
-                "📚 <strong>" +
-                item.name +
-                "</strong> — " +
-                item.price +
-                " جنيه × " +
-                item.quantity +
+                <div class="cart-item">
 
-                ' <button onclick="removeFromCart(' +
-                index +
-                ')">حذف</button>'
+                    📚 <strong>
+                    ${item.name}
+                    </strong>
 
-            ).join("<br><br>");
+                    <br>
+
+                    السعر:
+                    ${item.price.toLocaleString()}
+                    جنيه
+
+                    ×
+
+                    ${item.quantity}
+
+                    <br>
+
+                    المجموع:
+                    ${(item.price * item.quantity).toLocaleString()}
+                    جنيه
+
+                    <br><br>
+
+                    <button
+                    onclick="removeFromCart(${index})">
+
+                    🗑️ حذف
+
+                    </button>
+
+                </div>
+
+            `).join("");
+
     }
 
+
     document.getElementById("total").innerHTML =
-        "💰 المجموع: " + total + " جنيه";
+
+        "💰 المجموع: " +
+
+        total.toLocaleString() +
+
+        " جنيه";
+
 }
 
 
-/* إتمام الشراء */
+/* ==================================================
+   تأكيد الشراء
+================================================== */
 
 function checkout() {
 
     let name =
-        document.getElementById("name").value.trim();
+        document.getElementById("name")
+        .value
+        .trim();
+
 
     let email =
-        document.getElementById("email").value.trim();
+        document.getElementById("email")
+        .value
+        .trim();
+
 
     let payment =
         document.querySelector(
             'input[name="payment"]:checked'
         );
 
+
+    /* التأكد من البيانات */
 
     if (
         name === "" ||
@@ -570,135 +1594,216 @@ function checkout() {
     ) {
 
         document.getElementById("message").innerHTML =
+
             "⚠️ يرجى إكمال البيانات واختيار طريقة الدفع";
 
         return;
+
     }
 
+
+    /* التأكد من وجود كتاب */
 
     if (cart.length === 0) {
 
         document.getElementById("message").innerHTML =
+
             "⚠️ يرجى إضافة كتاب إلى السلة أولاً";
 
         return;
+
     }
 
+
+    /* رقم الطلب */
 
     let orderId =
         "BOOK-" + Date.now();
 
+
+    /* أسماء الكتب */
 
     let books = cart.map(item => {
 
         let subtotal =
             item.price * item.quantity;
 
+
         return (
+
             "📚 " +
             item.name +
+
             " | السعر: " +
             item.price +
+
             " جنيه | الكمية: " +
             item.quantity +
+
             " | المجموع: " +
             subtotal +
+
             " جنيه"
+
         );
 
     }).join("\n");
 
 
+    /* البيانات المرسلة إلى EmailJS */
+
     let templateParams = {
 
         name: name,
+
         email: email,
+
         books: books,
-        total: total + " جنيه",
-        payment: payment.value,
-        order_id: orderId
+
+        total:
+            total.toLocaleString() +
+            " جنيه",
+
+        payment:
+            payment.value,
+
+        order_id:
+            orderId
 
     };
 
 
     document.getElementById("message").innerHTML =
+
         "⏳ جاري إرسال تفاصيل الطلب...";
 
 
+    /* إرسال الطلب */
+
     emailjs.send(
+
         "service_alamalkotob",
+
         "template_nbm4c8o",
+
         templateParams
+
     )
+
 
     .then(function() {
 
+
         document.getElementById("message").innerHTML =
+
             "✅ تم تسجيل الطلب وإرسال التفاصيل بنجاح";
 
 
-        document.getElementById("orderSummary").innerHTML =
+        /* ملخص الطلب */
 
-            "<h2>📋 ملخص الطلب</h2>" +
+        document.getElementById("orderSummary").innerHTML = `
 
-            "<p><strong>رقم الطلب:</strong> " +
-            orderId +
-            "</p>" +
+            <h2>📋 ملخص الطلب</h2>
 
-            "<p><strong>الاسم:</strong> " +
-            name +
-            "</p>" +
+            <p>
+            <strong>رقم الطلب:</strong>
+            ${orderId}
+            </p>
 
-            "<p><strong>البريد الإلكتروني:</strong> " +
-            email +
-            "</p>" +
+            <p>
+            <strong>الاسم:</strong>
+            ${name}
+            </p>
 
-            "<p><strong>الكتب:</strong></p>" +
+            <p>
+            <strong>البريد الإلكتروني:</strong>
+            ${email}
+            </p>
 
-            "<p>" +
+            <p>
+            <strong>الكتب:</strong>
+            </p>
 
-            cart.map(item =>
+            <p>
 
-                "📚 " +
-                item.name +
-                "<br>" +
-                "السعر: " +
-                item.price +
-                " جنيه" +
-                "<br>" +
-                "الكمية: " +
-                item.quantity +
-                "<br>" +
-                "المجموع: " +
-                (item.price * item.quantity) +
-                " جنيه"
+            ${cart.map(item => `
 
-            ).join("<br><br>") +
+                📚 ${item.name}
 
-            "</p>" +
+                <br>
 
-            "<p><strong>💰 الإجمالي:</strong> " +
-            total +
-            " جنيه</p>" +
+                السعر:
+                ${item.price.toLocaleString()}
+                جنيه
 
-            "<p><strong>💳 طريقة الدفع:</strong> " +
-            payment.value +
-            "</p>";
+                <br>
+
+                الكمية:
+                ${item.quantity}
+
+                <br>
+
+                المجموع:
+                ${(item.price * item.quantity).toLocaleString()}
+                جنيه
+
+                <br><br>
+
+            `).join("")}
+
+            </p>
+
+            <p>
+
+            <strong>
+            💰 الإجمالي:
+            </strong>
+
+            ${total.toLocaleString()}
+            جنيه
+
+            </p>
+
+            <p>
+
+            <strong>
+            💳 طريقة الدفع:
+            </strong>
+
+            ${payment.value}
+
+            </p>
+
+        `;
 
     })
+
 
     .catch(function(error) {
 
         document.getElementById("message").innerHTML =
+
             "❌ حدث خطأ أثناء إرسال الطلب.";
 
-        console.log("EmailJS Error:", error);
+        console.log(
+            "EmailJS Error:",
+            error
+        );
 
     });
 
 }
 
+
+/* ==================================================
+   تشغيل السلة عند فتح الصفحة
+================================================== */
+
+showCart();
+
 </script>
 
+
 </body>
+
 </html>
